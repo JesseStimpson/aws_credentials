@@ -142,7 +142,7 @@ read_from_profile(File, Profile) ->
                     % https://docs.aws.amazon.com/cli/v1/userguide/cli-configure-sourcing-external.html
                     Process = maps:get(<<"credential_process">>, Map),
                     Stdout = os:cmd(binary_to_list(Process)),
-                    CredResult = jsx:decode(iolist_to_binary(Stdout)),
+                    CredResult = jsx:decode(iolist_to_binary(Stdout), [return_maps]),
                     CredsMap = maps:from_list(lists:filtermap(
                         fun
                             ({<<"AccessKeyId">>, AKI}) ->
